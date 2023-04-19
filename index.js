@@ -16,9 +16,13 @@ app.use(express.urlencoded({ extended: false }))
 
 
 const CustomerSignupRoutes = require("./routes/CustomerSignup.js")
-
+const SellerSignupRoutes = require("./routes/SellerSignup")
+const ProductCrudRoutes = require("./routes/ProductCrud")
+const Seller_Product_routesRoutes = require("./routes/Seller_Product_routes")
 app.use('/api', CustomerSignupRoutes);
-
+app.use('/api', SellerSignupRoutes);
+app.use('/api', ProductCrudRoutes);
+app.use('/api', Seller_Product_routesRoutes);
 
 mongoose.connect(
     process.env.MONGOURI,
