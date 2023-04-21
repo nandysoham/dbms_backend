@@ -146,7 +146,8 @@ router.post('/createuser', upload.single('profilePicture'),
 
             res.json({
                 success : "true",
-                msg : "Welcome to the Nordic Stores"
+                msg : "Welcome to the Nordic Stores",
+                authtoken
             })
 
         }

@@ -11,6 +11,26 @@ const ProductModelSchema = new mongoose.Schema({
       type: String,
       require: true
   },
+  sellerid:{
+      type : mongoose.Schema.Types.ObjectId,
+      ref : 'SellerModel'
+  },
+  quantity:{
+    type: String,
+    required: true,
+  },
+  org_price:{
+    type : String,
+    required : true
+  },
+  price:{
+      type: String,
+      required: true
+  },
+  discount:{
+    type: String,
+    default: 0
+  },
   pictures :
     [{img : {type : String}} ]
   ,

@@ -5,7 +5,7 @@ const env = require('dotenv');    // for .env running
 const mongoose = require('mongoose')
 
 const app = express();
-
+const sqlite3 = require('sqlite3').verbose();
 
 env.config();
 
@@ -18,12 +18,13 @@ app.use(express.urlencoded({ extended: false }))
 const CustomerSignupRoutes = require("./routes/CustomerSignup.js")
 const SellerSignupRoutes = require("./routes/SellerSignup")
 const ProductCrudRoutes = require("./routes/ProductCrud")
-const Seller_Product_routesRoutes = require("./routes/Seller_Product_routes")
+const CartCrudRoutes = require("./routes/CartCrud")
+const CreateOrderRoutes = require("./routes/CreateOrder")
 app.use('/api', CustomerSignupRoutes);
 app.use('/api', SellerSignupRoutes);
 app.use('/api', ProductCrudRoutes);
-app.use('/api', Seller_Product_routesRoutes);
-
+app.use('/api', CartCrudRoutes);
+app.use('/api', CreateOrderRoutes);
 mongoose.connect(
     process.env.MONGOURI,
     
@@ -41,6 +42,12 @@ mongoose.connect(
     });
 
 
+let db = new sqlite3.Database('./db/sample.db', (err) => {
+    if (err) {
+        return console.error(err.message);
+    }
+    console.log('Connected to the in-memory SQlite database.');
+    });    
 app.listen(process.env.PORT, ()=>{
     console.log(`the server is running on port ${process.env.PORT}`);
 })
