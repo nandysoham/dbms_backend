@@ -14,6 +14,7 @@ const UserModel = require("../models/CustomerModel")
 const SellerModel = require("../models/SellerModel")
 const ProductModel = require("../models/ProductModel")
 const OrderModel = require("../models/OrderModel")
+const PaymentModel = require("../models/PaymentModel")
 // to add each product by quantity 1
 router.post('/createorder',FetchUser, 
     async (req, res) =>{
@@ -77,6 +78,13 @@ router.post('/createorder',FetchUser,
                     final_part.push(tosend)    
                     total_amount += this_amount;
                 };
+                
+                const pay = PaymentModel.create({
+                    amount : total_amount,
+                    orderid : orderid,
+                    userid : req.user.id,
+                })
+
                 
                 return res.status(200).json({
                     final_part,

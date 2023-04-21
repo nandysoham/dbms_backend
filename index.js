@@ -20,11 +20,18 @@ const SellerSignupRoutes = require("./routes/SellerSignup")
 const ProductCrudRoutes = require("./routes/ProductCrud")
 const CartCrudRoutes = require("./routes/CartCrud")
 const CreateOrderRoutes = require("./routes/CreateOrder")
+const MakePaymentRoutes = require("./routes/MakePayment")
+const UpdateDeliveryRoutes = require("./routes/UpdateDelivery")
+const ShowDeliveryRoutes = require("./routes/ShowDelivery")
 app.use('/api', CustomerSignupRoutes);
 app.use('/api', SellerSignupRoutes);
 app.use('/api', ProductCrudRoutes);
 app.use('/api', CartCrudRoutes);
 app.use('/api', CreateOrderRoutes);
+app.use('/api', MakePaymentRoutes);
+app.use('/api', UpdateDeliveryRoutes);
+app.use('/api', ShowDeliveryRoutes);
+
 mongoose.connect(
     process.env.MONGOURI,
     
@@ -48,6 +55,8 @@ let db = new sqlite3.Database('./db/sample.db', (err) => {
     }
     console.log('Connected to the in-memory SQlite database.');
     });    
+
+
 app.listen(process.env.PORT, ()=>{
     console.log(`the server is running on port ${process.env.PORT}`);
 })
