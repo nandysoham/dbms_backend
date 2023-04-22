@@ -51,7 +51,7 @@ router.post("/makepayment/debit", FetchUser, async (req, res) => {
     //   console.log(req.body)
       const db = await AsyncDatabase.open(path.resolve(__dirname, "../db/sample.db"));
       const account = await db.get("SELECT AMOUNT FROM Bank WHERE DEBIT_CARD = ? AND DEBIT_CVV = ?", req.body.DEBIT_CARD, req.body.DEBIT_CVV );
-      console.log(account.AMOUNT)
+      console.log("Before purchasal the balance in bank", account.AMOUNT)
       if(account){
         if(parseInt(amount) > parseInt(account.AMOUNT)){
             return res.status(401).json({

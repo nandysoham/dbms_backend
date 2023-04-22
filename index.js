@@ -27,6 +27,9 @@ const CustomerLoginRoutes = require("./routes/CustomerLogin")
 const SellerLoginRoutes = require("./routes/SellerLogin")
 const CustomerPublicRoutes = require("./routes/CustomerPublicDetails")
 const SellerPublicRoutes = require("./routes/SellerPublicDetails")
+const ReturnProductIniRoutes = require("./routes/ReturnProductIni")
+const ReturnProductFinalRoutes = require("./routes/ReturnProductConfirm")
+
 app.use('/api', CustomerSignupRoutes);
 app.use('/api', SellerSignupRoutes);
 app.use('/api', ProductCrudRoutes);
@@ -39,6 +42,9 @@ app.use('/api', CustomerLoginRoutes)
 app.use('/api', SellerLoginRoutes)
 app.use("/api", CustomerPublicRoutes)
 app.use("/api", SellerPublicRoutes)
+app.use("/api", ReturnProductIniRoutes)
+app.use("/api", ReturnProductFinalRoutes)
+
 
 mongoose.connect(
     process.env.MONGOURI,

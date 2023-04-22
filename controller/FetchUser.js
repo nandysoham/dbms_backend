@@ -6,7 +6,7 @@
  env.config({ path: __dirname + '/./../.env' })
  
  
- const FetchUser = (req, res, next)=>{
+ const FetchUser = async (req, res, next)=>{
      const token = req.header("auth-token")
      if(!token){
          res.status(401).json({
@@ -17,7 +17,7 @@
      const JWT_SECRET = process.env.JWT_SECRET;
  
      try{
-         const data = jwt.verify(token, JWT_SECRET);
+         const data = await jwt.verify(token, JWT_SECRET);
          req.user = data.user
          next()
      }

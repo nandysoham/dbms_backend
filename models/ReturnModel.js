@@ -4,10 +4,6 @@ const mongoose = require('mongoose')
 
 const ReturnModelSchema = new mongoose.Schema({
   orderid:{             // to get to know about the order just query this
-    type: String,
-    required : true
-  },
-  orderid:{             // to get to know about the order just query this
     type: mongoose.Schema.Types.ObjectId,
     ref: 'OrderModel'
   },    
@@ -22,6 +18,14 @@ const ReturnModelSchema = new mongoose.Schema({
   productid:{
     type : mongoose.Schema.Types.ObjectId,
     ref : "ProductModel"
+  },
+  netorderid:{
+    type: String,
+    required : true
+  },
+  accountid:{
+    type : String,
+    required : true
   },
   quantity:{
     type: String,
@@ -38,7 +42,6 @@ const ReturnModelSchema = new mongoose.Schema({
   dayofpurchase:{
     type : Date
   },
-  updatedAt : Date,
 },{timestamps:true});
 
 const ReturnModel = mongoose.model('ReturnModel', ReturnModelSchema)
