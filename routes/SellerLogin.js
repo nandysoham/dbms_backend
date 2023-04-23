@@ -69,7 +69,8 @@ router.post('/seller/login',
             res.json({
                 success : "true",
                 msg : "Welcome to the Nordic Stores",
-                authtoken
+                authtoken,
+                user
             })
 
         }

@@ -95,7 +95,8 @@ router.post('/createproduct',FetchSeller, upload.array('pictures'),
                 org_price : req.body.org_price,
                 price: req.body.price,
                 quantity: req.body.quantity,
-                discount : req.body.discount,              
+                discount : req.body.discount,  
+                category : req.body.category,            
                 pictures
             })
 
