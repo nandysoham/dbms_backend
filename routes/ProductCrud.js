@@ -90,7 +90,7 @@ router.post('/createproduct',FetchSeller, upload.array('pictures'),
 
             product = await ProductModel.create({
                 name: req.body.name,
-                description: req.body.decription,
+                description: req.body.description,
                 sellerid: req.user.id,
                 org_price : req.body.org_price,
                 price: req.body.price,

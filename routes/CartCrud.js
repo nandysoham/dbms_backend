@@ -34,6 +34,7 @@ router.post('/addtocart',FetchUser,
 
         
         try{
+            console.log(req.body.productid)
             let cart = await CartModel.findOne({productid : req.body.productid})
             
             if(cart){
@@ -173,7 +174,42 @@ router.post('/removeallfromcart',FetchUser,
     }
 )
 
+router.post('/getcart',FetchUser, 
+    async (req, res) =>{
 
+        // someone trying to post an authorised request
+        
+        const signtoken = req.headers.signtoken 
+        if(!signtoken){
+            return res.status(401).json({
+                success:"false",
+                msg: "forbidden request"
+            })
+        }
+        
+        if(signtoken != process.env.SIGNTOKEN){
+            return res.status(401).json({
+                success:"false",
+                msg: "forbidden request"
+            })
+        }
+
+
+        
+        try{
+            let cart = await CartModel.find({userid : req.user.id})
+            res.json({
+                success : "true",
+                msg : "cart attached",
+                cart
+            })
+
+        }
+        catch(error){
+            console.log(error);
+        }
+    }
+)
 module.exports = router;
 
 // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ0MTdkODZlYTgyOTZjMTIyNzlkYjVkIiwiZW1haWwiOiJuYW5keUBnbWFpbC5jb20ifSwiaWF0IjoxNjgyMDEzNTc0fQ.6B5kjPClcgglolwx-ABCEQcWz1ganfsPuWgwSZsVsQg
