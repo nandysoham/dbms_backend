@@ -31,7 +31,9 @@ const ReturnProductIniRoutes = require("./routes/ReturnProductIni")
 const ReturnProductFinalRoutes = require("./routes/ReturnProductConfirm")
 const showProductRoutes = require("./routes/showProducts")
 const GetProductRoutes = require("./routes/ProductDetails")
-
+const ShowCustomerOrdersRoutes = require("./routes/ShowCustomerOrders")
+const ShowSellerOrdersRoutes = require("./routes/ShowSellerOrders")
+const ReturnRequestRoutes = require("./routes/ShowReturnRequests")
 
 
 app.use('/api', CustomerSignupRoutes);
@@ -50,6 +52,9 @@ app.use("/api", ReturnProductIniRoutes)
 app.use("/api", ReturnProductFinalRoutes)
 app.use("/api", GetProductRoutes)
 app.use("/api", showProductRoutes)
+app.use("/api", ShowCustomerOrdersRoutes)
+app.use("/api", ShowSellerOrdersRoutes)
+app.use("/api", ReturnRequestRoutes)
 
 
 mongoose.connect(

@@ -67,31 +67,32 @@ router.post('/returnproduct/confirm',FetchSeller,
 
             ret.status ="approved"
             let newret = await ReturnModel.findByIdAndUpdate(ret._id, {$set : ret}, {new: true});
-            
-
+            let order = await OrderModel.findById(ret.orderid)
+            order.type = "return"
+            let order2 = await OrderModel.findByIdAndUpdate(order._id, {$set : order}, {new: true});
             // now credit the account of the user
-            const db = await AsyncDatabase.open(path.resolve(__dirname, "../db/sample.db"));
-            const account = await db.get("SELECT * FROM Bank WHERE ID = ?", ret.accountid );
+            // const db = await AsyncDatabase.open(path.resolve(__dirname, "../db/sample.db"));
+            // const account = await db.get("SELECT AMOUNT FROM Bank WHERE ID = ?", ret.accountid );
 
+            // console.log(account)
+            // console.log("before the transaction Amt ", account.AMOUNT)
+            // if(account){
+            //     const new_amt = parseInt(account.AMOUNT) + parseInt(ret.payment)
+            //     console.log(new_amt)
+            //     const uptaccount = await db.exec(`
+            //         UPDATE Bank 
+            //         SET AMOUNT = ?
+            //         WHERE ID =?
+            //     `, [new_amt.toString(), ret.accountid.toString()])
 
-            console.log("before the transaction Amt ", account.AMOUNT)
-            if(account){
-                const new_amt = parseInt(account.AMOUNT) + parseInt(ret.payment)
-                console.log(new_amt)
-                const uptaccount = await db.exec(`
-                    UPDATE Bank 
-                    SET AMOUNT = ?
-                    WHERE ID =?
-                `, [new_amt.toString(), ret.accountid.toString()])
-
-                console.log("after transaction")
-            }
-            else{
-                return res.status(404).json({
-                    success : "false",
-                    msg : "Account number was incorrect"
-                })
-            }
+            //     console.log("after transaction")
+            // }
+            // else{
+            //     return res.status(404).json({
+            //         success : "false",
+            //         msg : "Account number was incorrect"
+            //     })
+            // }
 
             // now send a message to the delivery guy about the return of the package
             const put_delivery = await DeliveryModel.create({

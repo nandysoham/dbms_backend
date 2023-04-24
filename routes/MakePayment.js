@@ -66,12 +66,12 @@ router.post("/makepayment/debit", FetchUser, async (req, res) => {
             console.log(new_amt)
             const uptaccount = await db.exec(`
                 UPDATE Bank 
-                SET AMOUNT = ${new_amt.toString()}
+                SET AMOUNT = ${new_amt}
                 WHERE DEBIT_CARD = ${req.body.DEBIT_CARD} AND DEBIT_CVV = ${req.body.DEBIT_CVV}
             `)
 
             
-
+          
 
             // change the status of the order to paid
             // insert all the orders to the delivery module
@@ -100,7 +100,7 @@ router.post("/makepayment/debit", FetchUser, async (req, res) => {
 
             console.log("Reached here")
             return res.status(200).json({
-                success : "True",
+                success : "true",
                 msg: "payment done"
             })
 
