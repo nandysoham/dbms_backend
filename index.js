@@ -29,7 +29,7 @@ const CustomerPublicRoutes = require("./routes/CustomerPublicDetails")
 const SellerPublicRoutes = require("./routes/SellerPublicDetails")
 const ReturnProductIniRoutes = require("./routes/ReturnProductIni")
 const ReturnProductFinalRoutes = require("./routes/ReturnProductConfirm")
-
+const showProductRoutes = require("./routes/showProducts")
 const GetProductRoutes = require("./routes/ProductDetails")
 
 
@@ -49,6 +49,8 @@ app.use("/api", SellerPublicRoutes)
 app.use("/api", ReturnProductIniRoutes)
 app.use("/api", ReturnProductFinalRoutes)
 app.use("/api", GetProductRoutes)
+app.use("/api", showProductRoutes)
+
 
 mongoose.connect(
     process.env.MONGOURI,

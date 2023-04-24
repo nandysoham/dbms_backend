@@ -35,7 +35,7 @@ router.post('/addtocart',FetchUser,
         
         try{
             console.log(req.body.productid)
-            let cart = await CartModel.findOne({productid : req.body.productid})
+            let cart = await CartModel.findOne({productid : req.body.productid, userid : req.user.id})
             
             if(cart){
                 let qty = parseInt(cart.quantity);
@@ -53,7 +53,7 @@ router.post('/addtocart',FetchUser,
 
             cart = await CartModel.create({
                 productid: req.body.productid,
-                userid : req.body.userid,
+                userid : req.user.id,
                 quantity : "1"
             })
 
@@ -94,7 +94,7 @@ router.post('/removeonefromcart',FetchUser,
 
         
         try{
-            let cart = await CartModel.findOne({productid : req.body.productid})
+            let cart = await CartModel.findOne({productid : req.body.productid, userid : req.user.id})
             
             if(cart){
                 let qty = parseInt(cart.quantity);
@@ -151,7 +151,7 @@ router.post('/removeallfromcart',FetchUser,
 
         
         try{
-            let cart = await CartModel.findOne({productid : req.body.productid})
+            let cart = await CartModel.findOne({productid : req.body.productid, userid : req.user.id})
             
             if(cart){
                 newcart = await CartModel.findByIdAndRemove(cart._id)
