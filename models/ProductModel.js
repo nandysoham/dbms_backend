@@ -5,11 +5,13 @@ const mongoose = require('mongoose')
 const ProductModelSchema = new mongoose.Schema({
   name:{
       type: String,
-      required:true
+      required:true,
+      index: { unique: true }
   },
   description:{
       type: String,
-      require: true
+      require: true,
+      index: { unique: true }
   },
   sellerid:{
       type : mongoose.Schema.Types.ObjectId,
